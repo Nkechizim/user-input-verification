@@ -4,7 +4,9 @@ const bodyParser = require('body-parser');
 const joi = require('joi');
 
 const app = express();
+const server = require('http').createServer(app);
 
+server.listen(process.env.PORT || 3000); 
 
 //app.use('/public', express.static(path.join(__dirname, 'static')));
 app.use(bodyParser.urlencoded({extended:false}));
@@ -28,5 +30,3 @@ app.post('/', (req, res)=>{
         res.send('Successful');
     });
 });
-
-app.listen(3000);
