@@ -24,7 +24,7 @@ app.post('/', (req, res)=>{
     joi.validate(req.body, schema, (err, result)=>{
         if(err){
             console.log(err);
-            res.send('An error occured');
+            res.send('Your password must be between 6 and 15 characters!');
         }
         console.log(result);
         res.send('Successful');
