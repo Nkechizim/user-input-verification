@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>User Input Verification</title>
+        <h2>User Registration</h2>
         <style>
             #form{
                 float: left;
@@ -20,42 +21,72 @@
         </style>
     </head>
     <body>
-        <form action="/" method="POST" id="form">
+        <form onsubmit="return validateForm()" action="/register" method="POST" id="form">
             <div class="form-group">
-                <p>Email Adress: </p>
-                <input type="email" class="form-control" name="email">
+            <p><strong>Firstname</strong></p>
+            <input type="text" class="form-control" name="Firstname" required="true">
             </div>
             <div class="form-group">
-                <p>Password: </p>
-                <input type="password" class="form-control" name="password">
+              <p><strong>Lastname: </strong></p>
+              <input type="text" class="form-control" name="Lastname" required="true">
+            </div>
+            <div class="form-group">
+              <p><strong>Phone Number: </strong></p>
+              <input type="tel" class="form-control" name="PhoneNumber" required="true" pattern="^\d{11}$" title="Enter a valid Nigerian Phone Number, excluding country code">
+            </div>
+            <div class="form-group">
+                <p><strong>Email Address:</strong></p>
+                <input type="email" class="form-control" name="Email" required="true">
+            </div>
+            <div class="form-group">
+                <p><strong>Password: </strong> </p>
+                <input type="password" class="form-control" name="Password" required="true">
+            </div>
+            <div class="form-group">
+                <p><strong>Confirm Password: </strong> </p>
+                <input type="password" class="form-control" name="CPassword" required="true">
             </div>
             <div>
                     <br></br>
             </div >
             <div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button id="submit" type="submit" class="btn btn-default">Submit</button>
             </div >
-            
-            <div class="col-lg-4"></div>
-        </form> 
-
-        <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlNfOu91ta32o/NMZx1tRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-        <script>
-         $(document).ready(()=>{
+        </form>
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            function validateForm(){
              $('#form').submit((e)=>{
-                 e.preventDefault();
-                 $.ajax({
-                     url : '/',
-                     type : 'post',
-                     contentType : 'application/json',
-                     data : JSON.stringify($('#form').serializeArray()),
-                     success : (response)=>{
-                          console.log('Successful');
-                          console.log(response); 
-                     }
-                 });
-             });
-         });
-        </script>
+                    e.preventDefault();
+   
+                    var Firstname   = document.getElementsByName('Firstname');
+                    var Lastname    = document.getElementsByName('Lastname');
+                    var PhoneNumber = document.getElementsByName('PhoneNumber');
+                    var Email      = document.getElementsByName('Email');
+                    var Password   = document.getElementsByName('Password');
+                    var CPassword  = document.getElementsByName('CPassword');
+   
+                    if(!Firstname || !Lastname || !PhoneNumber || !Email || !Password || !CPassword){ 
+   
+                       alert("All Fields are Required");
+                       return false;
+   
+                   }else if(Password.length < 6){
+
+                       alert("Password must be more than 6!");
+                       return false;
+
+                   } else if(CPassword != Password){
+   
+                       alert("Passwords do not match!");
+                       return false;
+   
+                    } else{
+                        alert("Successfull");
+                       return true;
+                    }
+               })
+            }
+           </script>
     </body>
 </html>

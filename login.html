@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>User Input Verification</title>
+        <h2>User Login</h2>
+        <style>
+            #form{
+                float: left;
+                border: 1px, #ccc, solid;
+                border-radius: 10px;
+                padding: 10px;
+                background: #ccc;
+                width: 20%;
+                margin:0 auto;
+            }
+            input{
+                height: 25px;
+                width: 90%;
+                border: 5px, #ccc, solid;
+                box-shadow:dimgray;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="/login" method="POST" id="form">
+            <div class="form-group">
+              <p><strong>Phone Number: </strong></p>
+              <input type="tel" class="form-control" name="PhoneNumber" required="true" pattern="^\d{11}$" title="Enter a valid Nigerian Phone Number, excluding country code">
+            </div>
+            <div class="form-group">
+                <p><strong>Password: </strong> </p>
+                <input type="password" class="form-control" name="Password" required="true">
+            </div>
+            <div>
+                    <br></br>
+            </div >
+            <div>
+                <button id="submit" type="submit" class="btn btn-default">Submit</button>
+            </div >
+        </form>
+    </body>
+</html>
