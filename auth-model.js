@@ -60,31 +60,31 @@ const AuthSchema = new mongoose.Schema({
   
   AuthSchema.pre('save', function(next){
     if(this.isModified('Password')){
-      this.Password = this._hashPassword(this.Password);
+      _hashPassword = hashSync(this.Password);
+      this.Password = _hashPassword;
       return next();
     }
     return next();
   });
   
   
-  module.exports = {
-    _hashPassword(Password){
+ /*   _hashPassword(Password)=>{
         return hashSync(Password);
-      },
+      }
 
-         authenticateUser(Password){
-          return compareSync(Password, this.Password);
-        },
+    authenticateUser(Password){
+        return compareSync(Password, this.Password);
+      }
     
-          toJSON(){
-            return{
+    toJSON(){
+        return{
               _id: this._id,
               Firstname: this.Firstname,
               Lastname: this.Lastname,
               PhoneNumber: this.PhoneNumber,
               Email: this.Email,
-            };
-          },
-  }
+        };
+      }
+      */
   
 module.exports = mongoose.model('Users', AuthSchema);
